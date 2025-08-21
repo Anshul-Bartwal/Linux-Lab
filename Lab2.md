@@ -37,7 +37,7 @@ Find files and dir. using various criterions(name,size,location etc)
     - find -iname "file1.txt"
         - Not Case Sensitive
     - #### Using Directory
-        -find ~/Desktop iname "filename.txt"
+        -find ~/Desktop -iname "filename.txt"
 - ## With file extension
     -find -name "*.txt"
         - Gives every file with txt extension
@@ -48,6 +48,8 @@ Find files and dir. using various criterions(name,size,location etc)
             - f means file
         - find -type d
             - d means Dir
+        - find -type l
+            - l means link
 - ## Search by size
     - We can search according to size
         - find -size <+/-> N <c,k,M,G >
@@ -75,7 +77,7 @@ Find files and dir. using various criterions(name,size,location etc)
             - it will print all the line wiht keywords(highlighted) and show path of file in whic they are
     - search with line numbers
         - grep -n "keyword" /path
-        -Output
+        - Output
             - it print print all the lines and all with line numbers against them
 - ## We can club these find methods
 ## Archiving and Compressing
@@ -94,10 +96,24 @@ Find files and dir. using various criterions(name,size,location etc)
 - ### gzip :compress file more efficient
     - instead if making a new zip file containing the file it make the files ."txt".gz
     - gzip file1.txt
-    - gzip file.txt.gz
+    - gunzip file.txt.gz
     - it will remove the compressed file
     - for stop this
     - use -k it will make .txt.gz and keep .txt in that also
+## Creating links for files
+- ### Hard Link
+    - Removing the files doesnt not delete actual data untill all the hard_link fiels are deleted 
+    - ln file1.txt "file1_hardLink.txt"
+    - Any change done to normal file is updated in this link
+    - If we delete normal file hardlink file will have no issues
+    - We cant make hard link for dir.
+- ### Symbolic Link
+    - Removing the files break the link b/w them  <b>(Broken/ Dangling link)</b>
+    - ln -s file1.txt "file1_symLink.txt"
+    - Any change done to normal file is updated in this link
+    - If we delete normal fil softlink will not work
+    - We can make soft link for dir.
+
     
 
         
@@ -109,8 +125,8 @@ Find files and dir. using various criterions(name,size,location etc)
 
 
 
-
-
+## Adding new user
+- sudo adduser abcdcdcd
 
 
 
