@@ -30,6 +30,13 @@ User is communicating with kernel of os
 
 ### Operators
 - ``` echo "$((a+b))"```
+- For floats:
+    - For floating point operations, use the `bc` command:
+        - ```echo "scale=2; a/b" | bc```
+        - `scale=2` sets the number of decimal places.
+        - `bc` means basic calculator used for float calculations.
+        - Example:
+            - ```echo "scale=2; 5/2" | bc``` outputs `2.50`
 - "++ and --"
     it has pre and post
     - ```a++``` means Post increment
@@ -38,8 +45,55 @@ User is communicating with kernel of os
     - ```++a``` means pre increment
         - first add 1 to a then put the new value in place of ++a
 - #### SAME FOR DECREMENT
+- ### Relational operators
+- Old method  Working with []
+    - here 0:True , 1: False
+    ```bash
+    [ $a -eq $b ]
+    echo "a==b : $?"
+    ```
+    - `-eq` : equal
+    - `-ne` : not equal
+    - `-gt` : greater than
+    - `-lt` : less than
+    - `-ge` : greater than or equal to
+    - `-le` : less than or equal to
+    - #### Wont work on float works on just int
+- New Methods working with(())
+    - here 0: False 1: True
+    ```bash
+    echo "a==b $((a==b))"
+    ```
+    for floats:
+    ```bash
+    echo "a==b $(echo "($a==$b)"|bc)"
+    ```
+- ### Logical Operators
+```bash
+# 0:True 1:False
+[ $a -eq $b] && [ $a < 1 ]
+echo "Logical AND $?"
+[ $a -eq $b] || [ $a < 1 ]
+echo "lOGICAL OR $?"
+! [ $a -eq $b]
+echo "Logical NOR
+```
+- ### Bitwise Operators
+Works with integers
+``` bash
+a=3
+b=5
+echo "BITWISE AND: $((a&b))"
+echo "BITWISE OR: $((a|b))"
+echo "BITWISE NOT: $((~a))"
+echo "BITWISE XOR: $((a^b))"
 
 
+11111101 in 8 bit 
+```
+### trick 😏
+- `~(x)` x is number
+    - ~(x) =-x-1
 
 
 
