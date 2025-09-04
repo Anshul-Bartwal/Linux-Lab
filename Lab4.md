@@ -39,6 +39,7 @@ output
 ```
 Hello one two
 ```
+
 here 
 
 space seperated inputs
@@ -63,18 +64,19 @@ $@ : all arguments
 
 $# : number of agruments
 
-$?: last executed argument
+here `$?` : last executed argument
 
 ``` 
 ./file.sh a b c d e f
 ```
+
 file.sh
-````bash
+```bash
 echo "$1" #! output : a
 echo "$2" #  output : b 
 echo "$@" #  output : a b c d e f
 echo "$#" #  output : 6
-````
+``` 
 
 
 ## Arrays
@@ -140,3 +142,31 @@ echo ${a[@]::3}
 echo ${a[@]:2:}
 # start from 2 till end
 ```
+### conditional  statements
+##### if elif else
+```bash
+if [ $x -gt 5]; then
+        x=x+5
+        echo "$x"
+elif [ $x -lt 5 ]; then
+        x=x-5
+        echo "$x"
+else
+        echo "x is 5"
+fi
+```
+
+##### case statement
+```bash
+day="Mon"
+case $day in
+        "mon") echo "monday";;
+        "tue") echo "tuesdY";;
+        "SAT"|"sun") echo "weekend";;
+        *) echo "other day";;
+```
+###### shortcut
+```bash
+x=8
+[ $x -gt 10 ] && echo "x is big" # if condition is true execute
+[ $x -le 10 ] || echo " x is not big than 10"   # if condition is false execute
