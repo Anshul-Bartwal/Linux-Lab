@@ -139,3 +139,30 @@ sumis=$(add 3 5)
 echo "Sum is $sumis"
 ```
 
+
+### Nested Function call
+```bash
+add(){
+    sum=$(($1+$2))
+    echo $sum
+}
+f(){
+    a=$(add $1 $2)
+    b=$(add $3 )
+    res=$((a*b))
+    echo $res
+}
+
+f 1 2 3 4
+```
+### Recursion
+- Example : Factorial
+
+```bash
+fact(){
+    if [ $1 - eq 1 ];then
+        echo 1
+    else
+        prev=$(factorial $(($1-1)))
+        echo $(($1*prev))
+}
