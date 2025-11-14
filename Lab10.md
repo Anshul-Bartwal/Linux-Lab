@@ -132,5 +132,70 @@ maaaro maaro maaro
     - Stops the process for some time
     - it can be reinitated
 
-- SIGHUP
+- SIGHUP - signal hang up
+    - we canstop process and start from that checkpoint
 - SIGCHLD
+    - for killing the child of parent
+    - it sends the info to parent process
+
+## Handling prcess Signal
+```bash
+#!/bin/bash
+trap 'echo "Ctrl+C is received";sleep 11' SIGINT # it traps SIGINT SO we cant stop this with ^C or SIGINT 
+while true;do
+        echo "Running"
+        sleep 2
+done
+```
+
+- SIGTSTP
+    - we can continue the process after pressing CTRL+Z by using 
+        - `bg` : send it to background : it cant be stopped using CTRL Z
+        - `fg` : send it to foreground: it can be stopped using CTRL Z 
+    
+## Process Monitoring and Resource Usage
+`top` : taskmanger
+
+`htop`: better colourfull and scrollable task manager
+
+`vmstat 5`: virtual memory stat after every 5 sec stop
+- `procs -----------memory---------- ---swap-- -----io---- -system-- -------cpu-------`
+
+- `r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st gu`
+
+
+`vmstat 2 10` : virtual memory stat after every 2 sec but 10 times only
+
+`iostat 2 10` : io stat after every 2 sec gap 10 times 
+- `Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd`
+
+## Jobs :(
+
+- all the processes a shell runs 
+```bash
+#!/bin/bash
+sleep 60&
+PID1=$!
+jobs
+echo "HEllo Linux"
+PID2=$!
+jobs
+```
+
+## Inter Process Communication
+reader:
+
+```bash
+VirtualBox:~/Desktop/test$ mkfifo mypipe
+VirtualBox:~/Desktop/test$ cat mypipe
+VirtualBox:~/Desktop/test$ cat mypipe
+Hello Linux
+VirtualBox:~/Desktop/test$
+```
+writer:
+
+```bash
+VirtualBox:~/Desktop/test$ echo "Hello Linux" > mypipe
+```
+
+`mkfifo` : creates pipe b/w reader and writer 
